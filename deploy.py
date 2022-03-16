@@ -19,7 +19,7 @@ private_key="0x9df3327fb74a09982d4d0b2f3f37a55eab5ad4b730e81d3a64fc259c577f6d7c"
 owner_address=input("Enter Owner Id: ")# ใส่ Address ของ ปลายทางผู้รับเงิน
 
 password=input("Please enter your password:")
-if password==5555:
+if password=="5555":
     print("Please wait transaction pending")
     display.lcd_clear()   
     display.lcd_display_string("Please wait transaction pending", 1)
@@ -69,6 +69,8 @@ if password==5555:
     display.lcd_clear()   
     display.lcd_display_string("Thank you", 1)
     print("Thank you")
+    sleep(5)
+    display.lcd_clear()  
 
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
@@ -88,3 +90,4 @@ else:
     display.lcd_clear()   
     display.lcd_display_string("Wrong password", 1)
     sleep(5)
+    display.lcd_clear()  
