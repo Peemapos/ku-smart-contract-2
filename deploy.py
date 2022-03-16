@@ -36,7 +36,8 @@ if password=="5555":
     balance_currently=(int(balance)/(10**18))
     print("You balance=",balance_currently,"ETH")
     display.lcd_clear()   
-    display.lcd_display_string(f"You balance={round(balance_currently,2)}", 1)
+    display.lcd_display_string("You balance=", 1)
+    display.lcd_display_string(f"{round(balance_currently,2)}", 2)
 
     value=input("Please Enter Value in ETH unit: ")
 
