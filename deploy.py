@@ -19,6 +19,7 @@ owner_address=input("Enter Owner Id: ")# ใส่ Address ของ ปลา�
 
 
 print("Please wait transaction pending")
+display.lcd_clear()   
 display.lcd_display_string("Please wait transaction pending", 1)
 #สร้าง contract 
 
@@ -32,6 +33,7 @@ nonce=w3.eth.getTransactionCount(my_address)
 balance = w3.eth.getBalance(my_address);
 balance_currently=(int(balance)/(10**18))
 print("You balance=",balance_currently,"ETH")
+display.lcd_clear()   
 display.lcd_display_string(f"You balance={round(balance_currently,2)}", 1)
 
 value=input("Please Enter Value in ETH unit: ")
@@ -52,14 +54,17 @@ tx_hash = w3.eth.sendRawTransaction(signed_tx.rawTransaction)
 
 #get transaction hash
 print("You Send",value,"ETH from",my_address,"to",owner_address)
+display.lcd_clear()   
 display.lcd_display_string(f"You send: {value}", 1)
 print("Use this hash to check on Etherscan.io :",w3.toHex(tx_hash))
 
 balance_to_eth=(int(balance)/(10**18))-float(value)
 print("Your Balance after transaction=",balance_to_eth,"ETH")
+display.lcd_clear()   
 display.lcd_display_string("Your Balance", 1)
 display.lcd_display_string(f"{balance_to_eth} ETH", 2)
 sleep(3)
+display.lcd_clear()   
 display.lcd_display_string("Thank you", 1)
 print("Thank you")
 
