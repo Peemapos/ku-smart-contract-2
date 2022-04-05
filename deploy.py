@@ -82,10 +82,7 @@ if password=="5555":
         GPIO.output(18, 1)
             
         sleep(1)
-            
-        GPIO.output(18, 0)
-            
-        sleep(1)
+
 else:
     print("Wrong password")
     display.lcd_clear()   
