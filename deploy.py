@@ -4,7 +4,7 @@ from web3 import Web3
 import RPi.GPIO as GPIO
 from time import sleep
 import drivers
-from time import sleep
+
 
 
 display = drivers.Lcd()
@@ -22,7 +22,7 @@ password=input("Please enter your password:")
 if password=="5555":
     print("Please wait transaction pending")
     display.lcd_clear()   
-    display.lcd_display_string("Please wait transaction pending", 1)
+    display.lcd_display_string("Please wait", 1)
 #สร้าง contract 
 
 #get latestest transaction
@@ -39,49 +39,56 @@ if password=="5555":
     display.lcd_display_string("You balance=", 1)
     display.lcd_display_string(f"{round(balance_currently,2)}", 2)
 
-    value=input("Please Enter Value in ETH unit: ")
-
-    tx = {
-        'nonce': nonce,
-        'to': owner_address,
-        'value': w3.toWei(value, 'ether'),
-        'gas': 2000000,
-        'gasPrice': w3.toWei('50', 'gwei')
-    }
-
-    #sign the transaction
-    signed_tx = w3.eth.account.sign_transaction(tx, private_key)
-
-    #send transaction
-    tx_hash = w3.eth.sendRawTransaction(signed_tx.rawTransaction)
-
-    #get transaction hash
-    print("You Send",value,"ETH from",my_address,"to",owner_address)
-    display.lcd_clear()   
-    display.lcd_display_string(f"You send: {value}", 1)
-    print("Use this hash to check on Etherscan.io :",w3.toHex(tx_hash))
-
-    balance_to_eth=(int(balance)/(10**18))-float(value)
-    print("Your Balance after transaction=",balance_to_eth,"ETH")
-    display.lcd_clear()   
-    display.lcd_display_string("Your Balance", 1)
-    display.lcd_display_string(f"{balance_to_eth} ETH", 2)
-    sleep(3)
-    display.lcd_clear()   
-    display.lcd_display_string("Thank you", 1)
-    print("Thank you")
-    sleep(5)
-    display.lcd_clear()  
-
-    GPIO.setwarnings(False)
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(18, GPIO.OUT)
-    while (True):    
+    value=input("Please Enter Value in ETH unit (minimum is 1 ETH): ")
+    if value>=1:
             
-            
-        GPIO.output(18, 1)
-            
-        sleep(1)
+        ts = {
+            'nonce': nonce,
+            'to': owner_address,
+            'value': w3.toWei(value, 'ether'),
+            'gas': 2000000,
+            'gasPrice': w3.toWei('50', 'gwei')
+        }
+
+        #sign the transaction
+        signed_ts = w3.eth.account.sign_transaction(ts, private_key)
+
+        #send transaction
+        ts_hash = w3.eth.sendRawTransaction(signed_ts.rawTransaction)
+
+        #get transaction hash
+        print("You Send",value,"ETH from",my_address,"to",owner_address)
+        display.lcd_clear()   
+        display.lcd_display_string(f"You send: {value}", 1)
+        print("Use this hash to check on Etherscan.io :",w3.toHex(ts_hash))
+
+        balance_to_eth=(int(balance)/(10**18))-float(value)
+        print("Your Balance after transaction=",balance_to_eth,"ETH")
+        display.lcd_clear()   
+        display.lcd_display_string("Your Balance", 1)
+        display.lcd_display_string(f"{balance_to_eth} ETH", 2)
+        sleep(3)
+        display.lcd_clear()   
+        display.lcd_display_string("Thank you", 1)
+        print("Thank you")
+        sleep(5)
+        display.lcd_clear()  
+
+        GPIO.setwarnings(False)
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(18, GPIO.OUT)
+        while (True):    
+                
+                
+            GPIO.output(18, 1)
+                
+            sleep(1)
+    else:
+        print("You need to pay 1 ETH to unlock")
+        display.lcd_clear()   
+        display.lcd_display_string("You need to pay 1 ETH to unlock", 1)
+        sleep(5)
+        display.lcd_clear()  
 
 else:
     print("Wrong password")
