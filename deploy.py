@@ -40,7 +40,7 @@ if password=="5555":
     display.lcd_display_string(f"{round(balance_currently,2)}", 2)
 
     value=input("Please Enter Value in ETH unit (minimum is 1 ETH): ")
-    if value>=1:
+    if value=="1":
             
         ts = {
             'nonce': nonce,
