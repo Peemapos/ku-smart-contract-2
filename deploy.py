@@ -77,7 +77,7 @@ if password=="5555":
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(18, GPIO.OUT)  
-        GPIO.output(18, 1)
+        GPIO.output(18, 0)
         #Wait 1 Seconds
         sleep(1)
     else:
