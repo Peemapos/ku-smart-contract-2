@@ -86,7 +86,8 @@ if password=="5555":
     else:
         print("You need to pay 1 ETH to unlock")
         display.lcd_clear()   
-        display.lcd_display_string("You need to pay 1 ETH to unlock", 1)
+        display.lcd_display_string("You need to pay", 1)
+        display.lcd_display_string("1 ETH to unlock", 2)
         sleep(5)
         display.lcd_clear()  
 
