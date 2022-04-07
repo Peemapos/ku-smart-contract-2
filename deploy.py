@@ -39,7 +39,7 @@ if password=="5555":
     display.lcd_display_string("You balance=", 1)
     display.lcd_display_string(f"{round(balance_currently,2)}", 2)
 
-    value=input("Please Enter Value in ETH unit: ")
+    value=input("Please Enter Value in ETH unit : ")
     if value=="1":
             
         ts = {
@@ -78,10 +78,12 @@ if password=="5555":
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(18, GPIO.OUT)
         while (True):    
-                
-                
             GPIO.output(18, 1)
-                
+            #Wait 1 Seconds
+            sleep(1)
+            #Turns Relay On. Brings Voltage to Min GPIO can output ~0V.
+            GPIO.output(18, 0)
+            #Wait 1 Seconds
             sleep(1)
     else:
         print("You need to pay 1 ETH to unlock")
