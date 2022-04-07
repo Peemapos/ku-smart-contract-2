@@ -80,10 +80,6 @@ if password=="5555":
         GPIO.output(18, 1)
         #Wait 1 Seconds
         sleep(1)
-        #Turns Relay On. Brings Voltage to Min GPIO can output ~0V.
-        GPIO.output(18, 0)
-        #Wait 1 Seconds
-        sleep(1)
     else:
         print("You need to pay 1 ETH to unlock")
         display.lcd_clear()   
